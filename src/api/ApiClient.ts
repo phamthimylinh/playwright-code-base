@@ -6,22 +6,12 @@ export class ApiClient {
 
   constructor(request: APIRequestContext) {
     this.request = request;
-    // ensure BASE_URL has no trailing slash for consistent concatenation
+    // Keep BASE_URL normalized for safe URL concatenation.
     this.base = (process.env.BASE_URL ?? '').replace(/\/$/, '');
   }
 
-  async createUser(payload: Record<string, any>): Promise<APIResponse> {
+  async createUser(payload: Record<string, unknown>): Promise<APIResponse> {
     const url = `${this.base}/api/users`;
     return this.request.post(url, { data: payload });
-  }
-
-  async createBooking(payload: Record<string, any>): Promise<APIResponse> {
-    const url = `${this.base}/api/bookings`;
-    return this.request.post(url, { data: payload });
-  }
-
-  async deleteBooking(id: string): Promise<APIResponse> {
-    const url = `${this.base}/api/bookings/${id}`;
-    return this.request.delete(url);
   }
 }

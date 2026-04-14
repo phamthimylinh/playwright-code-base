@@ -1,14 +1,17 @@
 # Playwright automation framework (starter)
 
-This repository contains a small, reusable Playwright + TypeScript automation test framework scaffold targeted at a hotel booking/management system.
+This repository contains a small, reusable Playwright + TypeScript automation test framework scaffold.
 
 What's included
 - `playwright.config.ts` — base Playwright config (already present)
 - `tsconfig.json` — TypeScript configuration for tests and page objects
-- `src/pages` — Page Object Model classes (BasePage, LoginPage, BookingPage)
+- `src/pages` — Page Object Model classes (BasePage, LoginPage)
+- `src/api` — lightweight API helper client (`ApiClient`)
 - `src/utils` — small utilities (test data generator)
-- `tests/playwright-fixtures.ts` — shared fixtures that inject page objects into tests
-- `tests/booking.spec.ts` — example end-to-end booking flow test
+- `tests/playwright-fixtures.ts` — shared fixtures that inject page objects and API client into tests
+- `tests/example.spec.ts` — basic Playwright smoke examples
+- `tests/api/seed.spec.ts` — entrypoint to run all seed suites
+- `tests/api/seeds/*.seed.ts` — seed suites by entity (user, product, etc.)
 - `.env.example` — example env vars
 
 Getting started
@@ -25,6 +28,24 @@ npx playwright install
 
 ```bash
 npm test
+```
+
+Run only API seed test:
+
+```bash
+npx playwright test tests/api/seed.spec.ts
+```
+
+Run only user seed:
+
+```bash
+npx playwright test tests/api/seed.spec.ts --grep "@seed-user"
+```
+
+Run only product seed:
+
+```bash
+npx playwright test tests/api/seed.spec.ts --grep "@seed-product"
 ```
 
 Helpful tips
