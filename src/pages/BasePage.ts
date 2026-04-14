@@ -13,6 +13,8 @@ export class BasePage {
     await this.page.goto(url);
   }
 
+  // Use after navigation or major actions that trigger multiple requests.
+  // Prefer explicit waits (URL/locator/response) when possible to avoid slowing tests.
   async waitForLoad() {
     await this.page.waitForLoadState('networkidle');
   }
